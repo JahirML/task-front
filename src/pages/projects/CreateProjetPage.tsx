@@ -24,9 +24,8 @@ function CreateProjetPage() {
         toast.success(data);
         navigate("/");
       },
-      onError: () => {
-        toast.error("Hubo un error al crear el proyecto");
-        navigate("/");
+      onError: (error) => {
+        toast.error(error.message);
       },
     });
   }

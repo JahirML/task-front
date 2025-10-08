@@ -14,7 +14,8 @@
       "@/api/*": ["api/*"],
       "@/types/*": ["types/*"],
       "@/lib/*": ["lib/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/ui/*": ["ui/*"]
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
