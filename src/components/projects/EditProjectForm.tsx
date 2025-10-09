@@ -4,12 +4,14 @@ import type { ProjectFormData } from "@/types/index";
 import { useForm } from "react-hook-form";
 import useEditProject from "@/hooks/useEditProject";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 type EditProjectFormProps = {
   project: ProjectFormData;
 };
 
 function EditProjectForm({ project }: EditProjectFormProps) {
+  const queryClient = useQueryClient();
   const params = useParams();
   const navigate = useNavigate();
   const { editProject } = useEditProject();
@@ -30,7 +32,9 @@ function EditProjectForm({ project }: EditProjectFormProps) {
       { projectId, formData },
       {
         onSuccess: (data) => {
-          console.log(data);
+          queryClient.invalidateQueries({
+            queryKey: ["editProject", `project/${projectId}`],
+          });
           toast.success(data);
           navigate("/");
         },
