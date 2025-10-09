@@ -1,15 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectForm from "./ProjectForm";
 import type { ProjectFormData } from "@/types/index";
 import { useForm } from "react-hook-form";
+import useEditProject from "@/hooks/useEditProject";
+import { toast } from "react-toastify";
 
 type EditProjectFormProps = {
   project: ProjectFormData;
 };
 
 function EditProjectForm({ project }: EditProjectFormProps) {
+  const params = useParams();
+  const navigate = useNavigate();
+  const { editProject } = useEditProject();
   const { projectName, clientName, description } = project;
-
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       projectName,
@@ -17,10 +21,24 @@ function EditProjectForm({ project }: EditProjectFormProps) {
       description,
     },
   });
+
+  const projectId = params.projectId!;
   const { errors } = formState;
 
   const submitForm = (formData: ProjectFormData) => {
-    console.log(formData);
+    editProject(
+      { projectId, formData },
+      {
+        onSuccess: (data) => {
+          console.log(data);
+          toast.success(data);
+          navigate("/");
+        },
+        onError: (err) => {
+          toast.error(err.message);
+        },
+      },
+    );
   };
 
   return (

@@ -4,6 +4,7 @@ import Dashboard from "@/pages/Dashboard";
 import CreateProjetPage from "./pages/projects/CreateProjetPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import EditProject from "./pages/projects/EditProject";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/projects/:projectId/edit" element={<EditProject />} />
           </Route>
         </Routes>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </BrowserRouter>
   );

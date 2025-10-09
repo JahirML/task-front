@@ -1,12 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { createProject as createProjectApi } from "@/api/ProjejectApi";
+import { editProject as editProjectApi } from "@/api/ProjectApi";
+import type { ProjectFormData } from "../types";
 
-function useCreateProject() {
-  const { mutate: createProject, isPending } = useMutation({
-    mutationFn: createProjectApi,
+type EditProjectVariables = {
+  projectId: string;
+  formData: ProjectFormData;
+};
+
+function useEditProject() {
+  const { mutate: editProject, isPending } = useMutation({
+    mutationFn: ({ projectId, formData }: EditProjectVariables) =>
+      editProjectApi(projectId, formData),
   });
-  return { createProject, isPending };
+  return { editProject, isPending };
 }
 
-export default useCreateProject;
+export default useEditProject;
