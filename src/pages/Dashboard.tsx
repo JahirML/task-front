@@ -8,7 +8,6 @@ import Spinner from "@/ui/Spinner";
 
 function Dashboard() {
   const { projects, isLoading } = useGetProjects();
-  console.log(projects);
 
   if (isLoading) return <Spinner />;
   return (
