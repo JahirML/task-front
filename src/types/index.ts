@@ -24,3 +24,5 @@ export const dashboardProjectSchema = z.array(
     description: true,
   }),
 );
+
+export const editProjectSchema = z.object({});
