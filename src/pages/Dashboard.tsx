@@ -5,11 +5,12 @@ import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import useGetProjects from "@/hooks/useGetProjects";
 import { Link } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
+import useDeleteProject from "@/hooks/useDeleteProject";
 
 function Dashboard() {
   const { projects, isLoading } = useGetProjects();
+  const { deleteProject } = useDeleteProject();
 
-  if (isLoading) return <Spinner />;
   return (
     <>
       <h1 className="text-5xl font-black">Mis proyetos</h1>
@@ -24,6 +25,7 @@ function Dashboard() {
           Nuevo proyecto
         </Link>
       </nav>
+      {isLoading && <Spinner />}
       {projects?.length ? (
         <ul
           role="list"
@@ -87,7 +89,9 @@ function Dashboard() {
                         <button
                           type="button"
                           className="block px-3 py-1 text-sm leading-6 text-red-500"
-                          onClick={() => {}}
+                          onClick={() => {
+                            deleteProject(project._id);
+                          }}
                         >
                           Eliminar Proyecto
                         </button>
