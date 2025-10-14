@@ -14,6 +14,7 @@ function useGetProjectById() {
     queryFn: () => getProjectById(projectId),
   });
   return {
+    projectId,
     project,
     isLoading,
     isError,
