@@ -2,17 +2,18 @@ import TaskForm from "@/components/tasks/TaskForm";
 import useGetProjectById from "@/hooks/projects/useGetProjectById";
 import Modal from "@/ui/Modal";
 import Spinner from "@/ui/Spinner";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import type { TaskFormData } from "@/types/index";
 import useCreateTask from "@/hooks/tasks/useCreateTask";
+import { toast } from "react-toastify";
 
 function ProjectDetails() {
   const { project, isLoading } = useGetProjectById();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { createTask } = useCreateTask();
-
+  const { projectId } = useParams();
   const initialValues: TaskFormData = {
     name: "",
     description: "",
@@ -23,7 +24,19 @@ function ProjectDetails() {
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
-  function onSubmit(formData: TaskFormData) {}
+  function onSubmit(formData: TaskFormData) {
+    createTask(
+      { projectId, formData },
+      {
+        onSuccess: (data) => {
+          toast.success(data);
+        },
+        onError: (error) => {
+          toast.error(error.message);
+        },
+      },
+    );
+  }
 
   const isOpenModal = Boolean(searchParams.get("newTask"));
   function onClose() {
