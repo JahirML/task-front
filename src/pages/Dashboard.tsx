@@ -2,10 +2,10 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 
-import useGetProjects from "@/hooks/useGetProjects";
+import useGetProjects from "@/hooks/projects/useGetProjects";
 import { Link } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
-import useDeleteProject from "@/hooks/useDeleteProject";
+import useDeleteProject from "@/hooks/projects/useDeleteProject";
 
 function Dashboard() {
   const { projects, isLoading } = useGetProjects();

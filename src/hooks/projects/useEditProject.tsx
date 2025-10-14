@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { editProject as editProjectApi } from "@/api/ProjectApi";
-import type { ProjectFormData } from "../types";
+import type { ProjectFormData } from "../../types";
 
 type EditProjectVariables = {
   projectId: string;

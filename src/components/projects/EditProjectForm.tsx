@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectForm from "./ProjectForm";
 import type { ProjectFormData } from "@/types/index";
 import { useForm } from "react-hook-form";
-import useEditProject from "@/hooks/useEditProject";
+import useEditProject from "@/hooks/projects/useEditProject";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 

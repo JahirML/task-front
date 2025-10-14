@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ProjectForm from "@/components/projects/ProjectForm";
 import type { ProjectFormData } from "@/types/index";
 import { toast } from "react-toastify";
-import useCreateProject from "@/hooks/useCreateProject";
+import useCreateProject from "@/hooks/projects/useCreateProject";
 
 function CreateProjetPage() {
   const { createProject } = useCreateProject();

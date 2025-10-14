@@ -1,12 +1,29 @@
-import useGetProjectById from "@/hooks/useGetProjectById";
+import TaskForm from "@/components/tasks/TaskForm";
+import useGetProjectById from "@/hooks/projects/useGetProjectById";
 import Modal from "@/ui/Modal";
 import Spinner from "@/ui/Spinner";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import type { TaskFormData } from "@/types/index";
+import useCreateTask from "@/hooks/tasks/useCreateTask";
 
 function ProjectDetails() {
   const { project, isLoading } = useGetProjectById();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { createTask } = useCreateTask();
+
+  const initialValues: TaskFormData = {
+    name: "",
+    description: "",
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues: initialValues });
+
+  function onSubmit(formData: TaskFormData) {}
 
   const isOpenModal = Boolean(searchParams.get("newTask"));
   function onClose() {
@@ -36,6 +53,19 @@ function ProjectDetails() {
                 Llena el formulario y crea {""}
                 <span className="text-fuchsia-600">una tarea</span>
               </p>
+
+              <form
+                noValidate
+                className="mt-10 space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <TaskForm register={register} errors={errors} />
+                <input
+                  type="submit"
+                  value="Guardar tarea"
+                  className="w-full cursor-pointer bg-fuchsia-600 p-3 font-bold text-white uppercase transition-all hover:bg-fuchsia-700"
+                />
+              </form>
             </div>
           </Modal>
         )}

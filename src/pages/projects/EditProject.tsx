@@ -1,5 +1,5 @@
 import EditProjectForm from "@/components/projects/EditProjectForm";
-import useGetProjectById from "@/hooks/useGetProjectById";
+import useGetProjectById from "@/hooks/projects/useGetProjectById";
 import Spinner from "@/ui/Spinner";
 import { Navigate } from "react-router-dom";
 
