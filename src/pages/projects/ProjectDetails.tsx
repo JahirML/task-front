@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import type { TaskFormData } from "@/types/index";
 import useCreateTask from "@/hooks/tasks/useCreateTask";
 import { toast } from "react-toastify";
+import TaskList from "@/components/tasks/TaskList";
 
 function ProjectDetails() {
   const navigate = useNavigate();
@@ -63,6 +64,7 @@ function ProjectDetails() {
             Agregar tarea
           </button>
         </nav>
+        <TaskList tasks={project.tasks} />
         {isOpenModal && (
           <Modal onClose={onClose}>
             <div>
