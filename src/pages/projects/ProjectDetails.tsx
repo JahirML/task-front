@@ -8,6 +8,7 @@ import type { TaskFormData } from "@/types/index";
 import useCreateTask from "@/hooks/tasks/useCreateTask";
 import { toast } from "react-toastify";
 import TaskList from "@/components/tasks/TaskList";
+import { useQueryClient } from "@tanstack/react-query";
 
 function ProjectDetails() {
   const navigate = useNavigate();
@@ -28,6 +29,8 @@ function ProjectDetails() {
     reset,
   } = useForm({ defaultValues: initialValues });
 
+  const queryClient = useQueryClient();
+
   function onSubmit(formData: TaskFormData) {
     createTask(
       { projectId, formData },
@@ -36,6 +39,9 @@ function ProjectDetails() {
           toast.success(data);
           reset();
           onClose();
+          queryClient.invalidateQueries({
+            queryKey: ["editProject", `project/${projectId}`],
+          });
         },
         onError: (error) => {
           toast.error(error.message);
