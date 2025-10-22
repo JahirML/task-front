@@ -2,12 +2,19 @@ import type { Task } from "@/types/index";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
+import { useSearchParams } from "react-router-dom";
 
 type CardProps = {
   task: Task;
 };
 
 function TaskCard({ task }: CardProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  function editTask() {
+    setSearchParams(`editTask=${task._id}`);
+    // searchParams.set("taskId", task._id);
+  }
+
   return (
     <li className="flex justify-between gap-3 border border-slate-300 bg-white p-5">
       <div className="flex min-w-0 flex-col gap-y-4">
@@ -47,6 +54,7 @@ function TaskCard({ task }: CardProps) {
                 <button
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-gray-900"
+                  onClick={editTask}
                 >
                   Editar Tarea
                 </button>
