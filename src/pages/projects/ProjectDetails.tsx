@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import TaskList from "@/components/tasks/TaskList";
 import { useQueryClient } from "@tanstack/react-query";
 import EditTaskData from "@/components/tasks/EditTaskData";
+import useGetTaskById from "@/hooks/tasks/useGetTaskById";
 
 function ProjectDetails() {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ function ProjectDetails() {
 
   const { createTask } = useCreateTask();
   const { project, isLoading, projectId } = useGetProjectById();
-  const taskId = searchParams.get("editTask");
-  console.log(taskId);
+  const { task, isLoading: isLoadingTASK, taskId } = useGetTaskById();
+
   const initialValues: TaskFormData = {
     name: "",
     description: "",
@@ -97,7 +98,7 @@ function ProjectDetails() {
             </div>
           </Modal>
         )}
-        {taskId && <EditTaskData id={taskId} />}
+        {taskId && <EditTaskData task={task} />}
       </>
     );
 }
