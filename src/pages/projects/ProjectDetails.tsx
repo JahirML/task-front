@@ -98,7 +98,7 @@ function ProjectDetails() {
             </div>
           </Modal>
         )}
-        {task && <EditTaskData task={task} />}
+        {task && <EditTaskData projectId={projectId} />}
       </>
     );
 }
