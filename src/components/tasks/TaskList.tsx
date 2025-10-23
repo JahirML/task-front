@@ -38,7 +38,7 @@ function TaskList({ tasks }: TaskProps) {
     currentGroup = [...currentGroup, task];
     return { ...acc, [task.status]: currentGroup };
   }, initialStatusGroups);
-  console.log(groupedTasks);
+
   return (
     <>
       <h2 className="my-10 text-5xl font-black">Tareas</h2>
