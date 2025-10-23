@@ -2,7 +2,7 @@ import TaskForm from "@/components/tasks/TaskForm";
 import useGetProjectById from "@/hooks/projects/useGetProjectById";
 import Modal from "@/ui/Modal";
 import Spinner from "@/ui/Spinner";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import type { TaskFormData } from "@/types/index";
 import useCreateTask from "@/hooks/tasks/useCreateTask";
@@ -16,7 +16,7 @@ function ProjectDetails() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { task, isLoading: isLoadingTask } = useGetTaskById();
+  const { task, isError } = useGetTaskById();
 
   const { createTask } = useCreateTask();
   const { project, isLoading, projectId } = useGetProjectById();
@@ -34,8 +34,6 @@ function ProjectDetails() {
 
   const queryClient = useQueryClient();
 
-  const taskId = searchParams.get("editTask");
-
   function onSubmit(formData: TaskFormData) {
     createTask(
       { projectId, formData },
@@ -44,9 +42,7 @@ function ProjectDetails() {
           toast.success(data);
           reset();
           onClose();
-          queryClient.invalidateQueries({
-            queryKey: ["editProject", `project/${projectId}`],
-          });
+          queryClient.invalidateQueries();
         },
         onError: (error) => {
           toast.error(error.message);
@@ -59,6 +55,8 @@ function ProjectDetails() {
   function onClose() {
     navigate("", { replace: true });
   }
+
+  if (isError) <Navigate to={"/404"} />;
   if (isLoading) return <Spinner />;
   if (project)
     return (

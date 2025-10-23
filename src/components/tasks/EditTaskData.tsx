@@ -1,9 +1,11 @@
 import type { Task, TaskFormData } from "@/types/index";
 import Modal from "@/ui/Modal";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import TaskForm from "./TaskForm";
-import useGetTaskById from "@/hooks/tasks/useGetTaskById";
+import useUpdateTask from "@/hooks/tasks/useUpdateTask";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 type Props = {
   task: Task;
@@ -18,6 +20,11 @@ function EditTaskData({ task }: Props) {
   } = useForm<TaskFormData>({
     defaultValues: { name: task.name, description: task.description },
   });
+  const params = useParams();
+  const projectId = params.projectId!;
+
+  const { editTask } = useUpdateTask();
+  const queryClient = useQueryClient();
 
   const navigate = useNavigate();
   function onClose() {
@@ -25,7 +32,19 @@ function EditTaskData({ task }: Props) {
   }
 
   function submitForm(formData: TaskFormData) {
-    console.log(formData);
+    editTask(
+      { formData, taskId: task._id, projectId },
+      {
+        onSuccess(data) {
+          onClose();
+          queryClient.invalidateQueries({
+            queryKey: ["editProject", `project/${projectId}`],
+          });
+          toast.success(data);
+          reset();
+        },
+      },
+    );
   }
 
   return (

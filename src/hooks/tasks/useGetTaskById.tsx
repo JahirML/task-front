@@ -8,12 +8,16 @@ function useGetTaskById() {
   const projectId = params.projectId!;
   const taskId = searchParams.get("editTask") as string;
 
-  const { data: task, isLoading } = useQuery({
+  const {
+    data: task,
+    isLoading,
+    isError,
+  } = useQuery({
     queryFn: () => getTaskById({ projectId, taskId }),
     queryKey: ["task", taskId],
     enabled: !!taskId,
   });
-  return { taskId, task, isLoading };
+  return { taskId, task, isLoading, isError };
 }
 
 export default useGetTaskById;
