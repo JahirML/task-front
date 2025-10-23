@@ -1,15 +1,31 @@
-import type { Task } from "@/types/index";
+import type { Task, TaskFormData } from "@/types/index";
 import Modal from "@/ui/Modal";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import TaskForm from "./TaskForm";
+import useGetTaskById from "@/hooks/tasks/useGetTaskById";
 
 type Props = {
   task: Task;
 };
 
 function EditTaskData({ task }: Props) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<TaskFormData>({
+    defaultValues: { name: task.name, description: task.description },
+  });
+
   const navigate = useNavigate();
   function onClose() {
     navigate("", { replace: true });
+  }
+
+  function submitForm(formData: TaskFormData) {
+    console.log(formData);
   }
 
   return (
@@ -22,7 +38,12 @@ function EditTaskData({ task }: Props) {
           <span className="text-fuchsia-600">este formulario</span>
         </p>
 
-        <form className="mt-10 space-y-3" noValidate>
+        <form
+          className="mt-10 space-y-3"
+          onSubmit={handleSubmit(submitForm)}
+          noValidate
+        >
+          <TaskForm register={register} errors={errors} />
           <input
             type="submit"
             className="w-full cursor-pointer bg-fuchsia-600 p-3 text-xl font-black text-white hover:bg-fuchsia-700"

@@ -16,10 +16,10 @@ function ProjectDetails() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const { task, isLoading: isLoadingTask } = useGetTaskById();
 
   const { createTask } = useCreateTask();
   const { project, isLoading, projectId } = useGetProjectById();
-  const { task, isLoading: isLoadingTASK, taskId } = useGetTaskById();
 
   const initialValues: TaskFormData = {
     name: "",
@@ -33,6 +33,8 @@ function ProjectDetails() {
   } = useForm({ defaultValues: initialValues });
 
   const queryClient = useQueryClient();
+
+  const taskId = searchParams.get("editTask");
 
   function onSubmit(formData: TaskFormData) {
     createTask(
@@ -98,7 +100,7 @@ function ProjectDetails() {
             </div>
           </Modal>
         )}
-        {taskId && <EditTaskData task={task} />}
+        {task && <EditTaskData task={task} />}
       </>
     );
 }

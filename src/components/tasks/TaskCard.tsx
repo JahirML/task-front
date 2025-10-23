@@ -12,7 +12,6 @@ function TaskCard({ task }: CardProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   function editTask() {
     setSearchParams(`editTask=${task._id}`);
-    // searchParams.set("taskId", task._id);
   }
 
   return (
