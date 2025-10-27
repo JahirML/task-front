@@ -37,6 +37,9 @@ function EditTaskModal({ task, projectId }: Props) {
           queryClient.invalidateQueries({
             queryKey: ["editProject", `project/${projectId}`],
           });
+          queryClient.invalidateQueries({
+            queryKey: ["task", task._id],
+          });
           toast.success(data);
           reset();
         },
