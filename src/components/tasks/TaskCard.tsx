@@ -1,8 +1,11 @@
+import useDeleteTask from "@/hooks/tasks/useDeleteTask";
 import type { Task } from "@/types/index";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
+import { useQueryClient } from "@tanstack/react-query";
 import { Fragment } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type CardProps = {
   task: Task;
@@ -10,9 +13,26 @@ type CardProps = {
 
 function TaskCard({ task }: CardProps) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const params = useParams();
+  const { deleteteTask } = useDeleteTask();
+  const queryClient = useQueryClient();
+  const projectId = params.projectId!;
   function editTask() {
     setSearchParams(`editTask=${task._id}`);
   }
+  const handleDeleteTask: React.MouseEventHandler<HTMLButtonElement> = () => {
+    deleteteTask(
+      { projectId, taskId: task._id },
+      {
+        onSuccess: (data) => {
+          toast.success(data);
+          queryClient.invalidateQueries({
+            queryKey: ["editProject", `project/${projectId}`],
+          });
+        },
+      },
+    );
+  };
 
   return (
     <li className="flex justify-between gap-3 border border-slate-300 bg-white p-5">
@@ -63,6 +83,7 @@ function TaskCard({ task }: CardProps) {
                 <button
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-red-500"
+                  onClick={handleDeleteTask}
                 >
                   Eliminar Tarea
                 </button>
