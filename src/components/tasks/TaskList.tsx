@@ -1,6 +1,6 @@
 import type { Task } from "@/types/index";
 import TaskCard from "./TaskCard";
-import { statusTranslations } from "@/locales/es";
+import { statusColors, statusTranslations } from "@/locales/es";
 
 type TaskProps = {
   tasks: Task[];
@@ -15,14 +15,6 @@ const initialStatusGroups: GroupedTasks = {
   inProgress: [],
   underReview: [],
   completed: [],
-};
-
-const statusColors: { [key: string]: string } = {
-  pending: "border-t-slate-500",
-  onHold: " border-t-red-500 ",
-  inProgress: "border-t-blue-500",
-  underReview: "border-t-amber-400",
-  completed: "border-t-emerald-500",
 };
 
 function TaskList({ tasks }: TaskProps) {
@@ -40,7 +32,7 @@ function TaskList({ tasks }: TaskProps) {
         {Object.entries(groupedTasks).map(([status, tasks]) => (
           <div key={status} className="min-w-[300px] 2xl:w-1/5 2xl:min-w-0">
             <h3
-              className={`border border-t-8 border-slate-300 bg-white p-3 text-xl font-light capitalize ${statusColors[status]}`}
+              className={`border border-t-8 border-slate-300 bg-white p-3 text-xl font-light capitalize border-t-${statusColors[status]}`}
             >
               {statusTranslations[status]}
             </h3>
