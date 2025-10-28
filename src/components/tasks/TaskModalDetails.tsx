@@ -1,7 +1,13 @@
+import useGetTaskById from "@/hooks/tasks/useGetTaskById";
 import Modal from "@/ui/Modal";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function TaskModalDetails() {
+  const { task, isError, isLoading, error } = useGetTaskById();
+  // console.log(task);
+  if (isError) {
+    toast.error(error?.message);
+  }
   return (
     <>
       <Modal>
