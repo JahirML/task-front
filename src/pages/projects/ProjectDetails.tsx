@@ -2,7 +2,7 @@ import TaskForm from "@/components/tasks/TaskForm";
 import useGetProjectById from "@/hooks/projects/useGetProjectById";
 import Modal from "@/ui/Modal";
 import Spinner from "@/ui/Spinner";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import type { TaskFormData } from "@/types/index";
 import useCreateTask from "@/hooks/tasks/useCreateTask";
@@ -10,14 +10,12 @@ import { toast } from "react-toastify";
 import TaskList from "@/components/tasks/TaskList";
 import { useQueryClient } from "@tanstack/react-query";
 import EditTaskData from "@/components/tasks/EditTaskData";
-import useGetTaskById from "@/hooks/tasks/useGetTaskById";
 import TaskModalDetails from "@/components/tasks/TaskModalDetails";
 
 function ProjectDetails() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { task, isError } = useGetTaskById();
 
   const { createTask } = useCreateTask();
   const { project, isLoading, projectId } = useGetProjectById();
@@ -54,11 +52,11 @@ function ProjectDetails() {
 
   const isOpenModal = Boolean(searchParams.get("newTask"));
   const ViewTaskModal = Boolean(searchParams.get("viewTask"));
+  const editTaskModal = Boolean(searchParams.get("editTask"));
   function onClose() {
     navigate("", { replace: true });
   }
 
-  if (isError) <Navigate to={"/404"} />;
   if (isLoading) return <Spinner />;
   if (project)
     return (
@@ -100,7 +98,7 @@ function ProjectDetails() {
             </div>
           </Modal>
         )}
-        {task && <EditTaskData projectId={projectId} />}
+        {editTaskModal && <EditTaskData projectId={projectId} />}
         {ViewTaskModal && <TaskModalDetails />}
       </>
     );
