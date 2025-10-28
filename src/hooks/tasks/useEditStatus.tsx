@@ -7,7 +7,7 @@ function useEditStatus() {
   const queryClient = useQueryClient();
   const params = useParams();
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.pathname);
+  const queryParams = new URLSearchParams(location.search);
   const taskId = queryParams.get("viewTask")!;
   const projectId = params.projectId!;
   const { mutate: updateTaskStatus } = useMutation({
