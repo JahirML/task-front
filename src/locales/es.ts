@@ -7,9 +7,9 @@ export const statusTranslations: { [key: string]: string } = {
 };
 
 export const statusColors: { [key: string]: string } = {
-  pending: "border-t-slate-500",
-  onHold: " border-t-red-500 ",
-  inProgress: "border-t-blue-500",
-  underReview: "border-t-amber-400",
-  completed: "border-t-emerald-500",
+  pending: "slate-500",
+  onHold: "red-500 ",
+  inProgress: "blue-500",
+  underReview: "amber-400",
+  completed: "emerald-500",
 };
