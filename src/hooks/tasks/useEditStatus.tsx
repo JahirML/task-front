@@ -25,7 +25,7 @@ function useEditStatus() {
       toast.error(err.message);
     },
   });
-  return { updateTaskStatus };
+  return { updateTaskStatus, taskId, projectId };
 }
 
 export default useEditStatus;
