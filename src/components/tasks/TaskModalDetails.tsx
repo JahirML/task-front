@@ -1,5 +1,7 @@
+import useEditStatus from "@/hooks/tasks/useEditStatus";
 import useGetTaskById from "@/hooks/tasks/useGetTaskById";
 import { statusTranslations } from "@/locales/es";
+import type { TaskStatus } from "@/types/index";
 import Modal from "@/ui/Modal";
 import { formatDate } from "@/utils/utils";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +10,21 @@ import { toast } from "react-toastify";
 function TaskModalDetails() {
   const navigate = useNavigate();
   const { task, isError, error } = useGetTaskById();
+  const { updateTaskStatus, projectId, taskId } = useEditStatus();
+
+  const handleChangeStatus: React.ChangeEventHandler<HTMLSelectElement> = (
+    e,
+  ) => {
+    const status = e.target.value as TaskStatus;
+    updateTaskStatus(
+      { taskId, projectId, status },
+      {
+        onSuccess: () => {
+          navigate("", { replace: true });
+        },
+      },
+    );
+  };
 
   if (isError) {
     toast.error(error?.message, { toastId: "error" });
@@ -39,6 +56,7 @@ function TaskModalDetails() {
                     id=""
                     className="w-full border border-gray-300 bg-white p-3"
                     defaultValue={task.status}
+                    onChange={handleChangeStatus}
                   >
                     {Object.entries(statusTranslations).map(([key, value]) => (
                       <option key={key} value={key}>
