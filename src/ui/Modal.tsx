@@ -1,11 +1,15 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ModalProps {
   children: React.ReactNode;
-  onClose: () => void;
 }
 
-const Modal = ({ children, onClose }: ModalProps) => {
+const Modal = ({ children }: ModalProps) => {
+  const navigate = useNavigate();
+  function onClose() {
+    navigate("", { replace: true });
+  }
   const ref = useRef<HTMLDivElement>(null);
   const [isClosing, setIsClosing] = useState(false);
 

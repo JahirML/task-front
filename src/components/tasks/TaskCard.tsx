@@ -65,6 +65,9 @@ function TaskCard({ task }: CardProps) {
                 <button
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-gray-900"
+                  onClick={() => {
+                    setSearchParams(`viewTask=${task._id}`);
+                  }}
                 >
                   Ver Tarea
                 </button>

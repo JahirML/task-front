@@ -47,7 +47,7 @@ function EditTaskModal({ task, projectId }: Props) {
     );
   }
   return (
-    <Modal onClose={onClose}>
+    <Modal>
       <div className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-4 text-left align-middle transition-all">
         <h3 className="my-5 text-4xl font-black">Editar Tarea</h3>
 

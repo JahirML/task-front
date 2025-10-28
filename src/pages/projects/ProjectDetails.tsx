@@ -11,6 +11,7 @@ import TaskList from "@/components/tasks/TaskList";
 import { useQueryClient } from "@tanstack/react-query";
 import EditTaskData from "@/components/tasks/EditTaskData";
 import useGetTaskById from "@/hooks/tasks/useGetTaskById";
+import TaskModalDetails from "@/components/tasks/TaskModalDetails";
 
 function ProjectDetails() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ function ProjectDetails() {
   }
 
   const isOpenModal = Boolean(searchParams.get("newTask"));
+  const ViewTaskModal = Boolean(searchParams.get("viewTask"));
   function onClose() {
     navigate("", { replace: true });
   }
@@ -75,7 +77,7 @@ function ProjectDetails() {
         </nav>
         <TaskList tasks={project.tasks} />
         {isOpenModal && (
-          <Modal onClose={onClose}>
+          <Modal>
             <div>
               <h3 className="mb-4 text-3xl font-black">Nueva Tarea</h3>
               <p className="text-xl font-bold">
@@ -99,6 +101,7 @@ function ProjectDetails() {
           </Modal>
         )}
         {task && <EditTaskData projectId={projectId} />}
+        {ViewTaskModal && <TaskModalDetails />}
       </>
     );
 }
