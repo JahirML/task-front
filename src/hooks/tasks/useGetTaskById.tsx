@@ -18,6 +18,7 @@ function useGetTaskById() {
     queryFn: () => getTaskById({ projectId, taskId }),
     queryKey: ["task", taskId],
     enabled: !!taskId,
+    retry: false,
   });
   return { taskId, task, isLoading, isError, error };
 }
