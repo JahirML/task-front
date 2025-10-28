@@ -1,4 +1,5 @@
 import useGetTaskById from "@/hooks/tasks/useGetTaskById";
+import { statusTranslations } from "@/locales/es";
 import Modal from "@/ui/Modal";
 import { formatDate } from "@/utils/utils";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,19 @@ function TaskModalDetails() {
               </p>
               <div className="my-5 space-y-3">
                 <label className="font-bold">
-                  Estado Actual: {task.status}
+                  Estado Actual:{" "}
+                  <select
+                    name=""
+                    id=""
+                    className="w-full border border-gray-300 bg-white p-3"
+                    defaultValue={task.status}
+                  >
+                    {Object.entries(statusTranslations).map(([key, value]) => (
+                      <option key={key} value={key}>
+                        {value}
+                      </option>
+                    ))}
+                  </select>
                 </label>
               </div>
             </div>
