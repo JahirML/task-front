@@ -7,6 +7,7 @@ const authSchema = z.object({
   email: z.email(),
   password: z.string(),
   password_confirmation: z.string(),
+  token: z.string(),
 });
 
 type Auth = z.infer<typeof authSchema>;
@@ -15,6 +16,7 @@ export type UserRegistrationForm = Pick<
   Auth,
   "email" | "password" | "name" | "password_confirmation"
 >;
+export type ConfirmToken = Pick<Auth, "token">;
 
 // task
 export const taskStatusSchema = z.enum([

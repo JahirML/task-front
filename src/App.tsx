@@ -9,6 +9,7 @@ import ProjectDetails from "./pages/projects/ProjectDetails";
 import AuthLayout from "./layouts/AuthLayout";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import ConfirmAccount from "./pages/auth/ConfirmAccount";
 
 const queryClient = new QueryClient();
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route element={<AuthLayout />}>
             <Route path="/auth/login" element={<LoginPage />} />
             <Route path="/auth/register" element={<RegisterPage />} />
+            <Route path="/auth/confirm" element={<ConfirmAccount />} />
           </Route>
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />
