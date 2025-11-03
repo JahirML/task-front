@@ -6,6 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import EditProject from "./pages/projects/EditProject";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProjectDetails from "./pages/projects/ProjectDetails";
+import AuthLayout from "./layouts/AuthLayout";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 
 const queryClient = new QueryClient();
 function App() {
@@ -18,6 +21,10 @@ function App() {
             <Route path="/projects/create" element={<CreateProjetPage />} />
             <Route path="/projects/:projectId" element={<ProjectDetails />} />
             <Route path="/projects/:projectId/edit" element={<EditProject />} />
+          </Route>
+          <Route element={<AuthLayout />}>
+            <Route path="/auth/login" element={<LoginPage />} />
+            <Route path="/auth/register" element={<RegisterPage />} />
           </Route>
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />
