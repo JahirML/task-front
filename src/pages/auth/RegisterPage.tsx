@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
-import { UserRegistrationForm } from "@/types/index";
+import type { UserRegistrationForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
 import { Link } from "react-router-dom";
+import useCreateAccount from "@/hooks/auth/useCreateAccount";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
+  const { createAccount } = useCreateAccount();
   const initialValues: UserRegistrationForm = {
     name: "",
     email: "",
@@ -21,7 +24,15 @@ export default function RegisterPage() {
 
   const password = watch("password");
 
-  const handleRegister = (formData: UserRegistrationForm) => {};
+  const handleRegister = (formData: UserRegistrationForm) => {
+    createAccount(formData, {
+      onSuccess: (data) => {
+        console.log(data);
+        toast.success(data);
+        reset();
+      },
+    });
+  };
 
   return (
     <>
