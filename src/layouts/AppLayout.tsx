@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 function AppLayout() {
   return (
     <>
-      <header className="bg-gray-800 py-5">
+      <header className="bg-gray-800 p-5">
         <div className="mx-auto flex max-w-screen-2xl flex-col items-center justify-between lg:flex-row">
           <div className="w-64">
             <Link to={"/"}>
