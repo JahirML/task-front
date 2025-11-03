@@ -1,5 +1,6 @@
 import Logo from "@/components/Logo";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 function AuthLayout() {
   return (
@@ -12,6 +13,8 @@ function AuthLayout() {
           </div>
         </div>
       </div>
+
+      <ToastContainer pauseOnHover={false} closeOnClick={true} />
     </>
   );
 }
