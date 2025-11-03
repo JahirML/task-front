@@ -41,7 +41,7 @@ export default function ConfirmAccount() {
 
       <nav className="mt-10 flex flex-col space-y-4">
         <Link
-          to="/auth/new-code"
+          to="/auth/request-code"
           className="text-center font-normal text-gray-300"
         >
           Solicitar un nuevo Código
