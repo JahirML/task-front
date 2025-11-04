@@ -30,7 +30,7 @@ export default function LoginPage() {
       </p>
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="space-y-8 bg-white p-10"
+        className="mt-10 space-y-8 bg-white p-10"
         noValidate
       >
         <div className="flex flex-col gap-5">
