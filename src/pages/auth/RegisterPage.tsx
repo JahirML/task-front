@@ -132,7 +132,7 @@ export default function RegisterPage() {
           className="text-center font-normal text-gray-300"
         >
           Ya tienes cuenta?{" "}
-          <span className="text-fuchsia-600">Iniciar sesision</span>
+          <span className="text-fuchsia-600">Iniciar sesión</span>
         </Link>
         <Link
           to={"/auth/forgot-password"}

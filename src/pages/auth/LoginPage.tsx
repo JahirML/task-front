@@ -20,6 +20,14 @@ export default function LoginPage() {
 
   return (
     <>
+      <h1 className="text-3xl font-black text-white">Iniciar sesión</h1>
+      <p className="mt-5 text-xl font-light text-white">
+        Inicia sesion y
+        <span className="font-bold text-fuchsia-500">
+          {" "}
+          Comienza a planear tus proyectos
+        </span>
+      </p>
       <form
         onSubmit={handleSubmit(handleLogin)}
         className="space-y-8 bg-white p-10"
