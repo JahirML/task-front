@@ -11,6 +11,8 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ConfirmAccount from "./pages/auth/ConfirmAccount";
 import RequestNewCode from "./pages/auth/RequestNewCode";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import NewPassword from "./pages/auth/NewPassword";
 
 const queryClient = new QueryClient();
 function App() {
@@ -29,6 +31,8 @@ function App() {
             <Route path="/auth/register" element={<RegisterPage />} />
             <Route path="/auth/confirm" element={<ConfirmAccount />} />
             <Route path="/auth/request-code" element={<RequestNewCode />} />
+            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+            <Route path="/auth/new-password" element={<NewPassword />} />
           </Route>
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />

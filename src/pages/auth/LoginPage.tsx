@@ -73,6 +73,13 @@ export default function LoginPage() {
         >
           ¿No tienes cuenta? <span className="text-fuchsia-600">Crear una</span>
         </Link>
+        <Link
+          to={"/auth/forgot-password"}
+          className="text-center font-normal text-gray-300"
+        >
+          ¿Olvidaste tu contraseña?{" "}
+          <span className="text-fuchsia-600">Reestablecer</span>
+        </Link>
       </nav>
     </>
   );
