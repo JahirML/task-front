@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { type ForgotPasswordForm } from "../../types";
 import ErrorMessage from "@/components/ErrorMessage";
+import useForgotPassword from "@/hooks/auth/useForgotPassword";
 
 export default function ForgotPassword() {
   const initialValues: ForgotPasswordForm = {
@@ -13,8 +14,15 @@ export default function ForgotPassword() {
     reset,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
+  const { resetPassword } = useForgotPassword();
 
-  const handleForgotPassword = (formData: ForgotPasswordForm) => {};
+  const handleForgotPassword = (formData: ForgotPasswordForm) => {
+    resetPassword(formData, {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  };
 
   return (
     <>
