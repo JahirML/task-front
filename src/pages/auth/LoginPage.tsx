@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
-import { UserLoginForm } from "@/types/index";
+import { type UserLoginForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
 import { Link } from "react-router-dom";
+import useLogin from "@/hooks/auth/useLogin";
 
 export default function LoginPage() {
+  const { login } = useLogin();
   const initialValues: UserLoginForm = {
     email: "",
     password: "",
@@ -14,7 +16,7 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
-  const handleLogin = (formData: UserLoginForm) => {};
+  const handleLogin = (formData: UserLoginForm) => login(formData);
 
   return (
     <>
