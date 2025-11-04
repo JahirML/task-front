@@ -25,3 +25,16 @@ export async function confirmAccountApi(token: ConfirmToken) {
     }
   }
 }
+
+export async function requestConfirmationCode(formData: ConfirmToken) {
+  try {
+    const url = "auth/request-code";
+    const { data } = await api.post<string>(url, formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+// auth / request - code;

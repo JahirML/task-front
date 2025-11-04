@@ -10,6 +10,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ConfirmAccount from "./pages/auth/ConfirmAccount";
+import RequestNewCode from "./pages/auth/RequestNewCode";
 
 const queryClient = new QueryClient();
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/auth/login" element={<LoginPage />} />
             <Route path="/auth/register" element={<RegisterPage />} />
             <Route path="/auth/confirm" element={<ConfirmAccount />} />
+            <Route path="/auth/request-code" element={<RequestNewCode />} />
           </Route>
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />
