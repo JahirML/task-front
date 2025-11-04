@@ -1,9 +1,11 @@
 import NewPasswordToken from "@/components/auth/NewPasswordToken";
 import NewPasswordForm from "@/components/auth/NewPasswordForm";
 import { useState } from "react";
+import { ConfirmToken } from "@/types/index";
 
 function NewPassword() {
   const [isValidToken, setIsValidToken] = useState(false);
+  const [token, setToken] = useState<ConfirmToken["token"]>("");
 
   return (
     <>
@@ -18,7 +20,15 @@ function NewPassword() {
         </span>
       </p>
 
-      {!isValidToken ? <NewPasswordToken /> : <NewPasswordForm />}
+      {!isValidToken ? (
+        <NewPasswordToken
+          token={token}
+          setToken={setToken}
+          setIsValidToken={setIsValidToken}
+        />
+      ) : (
+        <NewPasswordForm token={token} />
+      )}
     </>
   );
 }
