@@ -31,7 +31,7 @@ export default function RegisterPage() {
   const handleRegister = (formData: UserRegistrationForm) => {
     createAccount(formData, {
       onSuccess: (data) => {
-        navigate("/auth/login");
+        navigate("/auth/confirm");
         toast.success(data);
         reset();
       },
