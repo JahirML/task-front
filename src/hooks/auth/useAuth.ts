@@ -13,6 +13,7 @@ function useAuth() {
     queryFn: getUser,
     retry: 1,
     refetchOnWindowFocus: false,
+    enabled: !!token,
   });
   return { user, isLoading, isError, error };
 }
