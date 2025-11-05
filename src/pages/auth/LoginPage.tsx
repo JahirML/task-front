@@ -1,11 +1,15 @@
 import { useForm } from "react-hook-form";
 import { type UserLoginForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useLogin from "@/hooks/auth/useLogin";
+import useAuth from "@/hooks/auth/useAuth";
 
 export default function LoginPage() {
   const { login } = useLogin();
+  const navigate = useNavigate();
+  const { user = {}, isLoading } = useAuth();
+  console.log(user);
   const initialValues: UserLoginForm = {
     email: "",
     password: "",
@@ -17,7 +21,8 @@ export default function LoginPage() {
   } = useForm({ defaultValues: initialValues });
 
   const handleLogin = (formData: UserLoginForm) => login(formData);
-
+  if (isLoading) return;
+  if (user) navigate("/", { replace: true });
   return (
     <>
       <h1 className="text-3xl font-black text-white">Iniciar sesión</h1>

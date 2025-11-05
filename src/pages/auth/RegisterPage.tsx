@@ -1,18 +1,22 @@
 import { useForm } from "react-hook-form";
 import type { UserRegistrationForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
-import { Link } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
 import useCreateAccount from "@/hooks/auth/useCreateAccount";
 import { toast } from "react-toastify";
+import useAuth from "@/hooks/auth/useAuth";
 
 export default function RegisterPage() {
   const { createAccount } = useCreateAccount();
+  const { user = {}, isLoading } = useAuth();
+
   const initialValues: UserRegistrationForm = {
     name: "",
     email: "",
     password: "",
     password_confirmation: "",
   };
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,13 +31,13 @@ export default function RegisterPage() {
   const handleRegister = (formData: UserRegistrationForm) => {
     createAccount(formData, {
       onSuccess: (data) => {
-        console.log(data);
+        navigate("/auth/login");
         toast.success(data);
         reset();
       },
     });
   };
-
+  if (user) navigate("/", { replace: true });
   return (
     <>
       <h1 className="text-5xl font-black text-white">Crear Cuenta</h1>
