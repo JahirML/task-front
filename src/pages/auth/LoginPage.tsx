@@ -8,7 +8,7 @@ import useAuth from "@/hooks/auth/useAuth";
 export default function LoginPage() {
   const { login } = useLogin();
   const navigate = useNavigate();
-  const { user = {}, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
   console.log(user);
   const initialValues: UserLoginForm = {
     email: "",

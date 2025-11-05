@@ -8,7 +8,7 @@ import useAuth from "@/hooks/auth/useAuth";
 
 export default function RegisterPage() {
   const { createAccount } = useCreateAccount();
-  const { user = {}, isLoading } = useAuth();
+  const { user } = useAuth();
 
   const initialValues: UserRegistrationForm = {
     name: "",
