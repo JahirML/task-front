@@ -4,11 +4,12 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "@/hooks/auth/useLogin";
 import useAuth from "@/hooks/auth/useAuth";
+import Spinner from "@/ui/Spinner";
 
 export default function LoginPage() {
   const { login } = useLogin();
   const navigate = useNavigate();
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
   console.log(user);
   const initialValues: UserLoginForm = {
     email: "",
@@ -21,7 +22,7 @@ export default function LoginPage() {
   } = useForm({ defaultValues: initialValues });
 
   const handleLogin = (formData: UserLoginForm) => login(formData);
-  if (isLoading) return;
+
   if (user) navigate("/", { replace: true });
   return (
     <>
