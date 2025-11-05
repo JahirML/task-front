@@ -98,4 +98,15 @@ export async function updatePasswordWithToken({
     }
   }
 }
+export async function getUser() {
+  try {
+    const url = `auth/user`;
+    const { data } = await api(url);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
 // auth / request - code;
