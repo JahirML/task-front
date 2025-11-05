@@ -19,7 +19,7 @@ function AppLayout() {
                 <Logo />
               </Link>
             </div>
-            <NavMenu />
+            <NavMenu username={user.name} />
           </div>
         </header>
         <section className="mx-auto mt-10 max-w-screen-2xl p-5">
