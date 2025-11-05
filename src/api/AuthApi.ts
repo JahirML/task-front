@@ -48,6 +48,7 @@ export async function loginApi(formData: UserLoginForm) {
   try {
     const url = "auth/login";
     const { data } = await api.post<string>(url, formData);
+    localStorage.setItem("AUTH_TOKEN_TASKFLOW", data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
