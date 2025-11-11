@@ -26,6 +26,8 @@ function ProjectTeam() {
           Volver a proyecto
         </Link>
       </nav>
+
+      <AddMemberModal />
     </>
   );
 }
