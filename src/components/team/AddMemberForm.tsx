@@ -30,7 +30,7 @@ export default function AddMemberForm() {
         noValidate
       >
         <div className="flex flex-col gap-3">
-          <label className="text-2xl font-normal" htmlFor="name">
+          <label className="text-lg font-normal" htmlFor="name">
             E-mail de Usuario
           </label>
           <input
@@ -51,7 +51,7 @@ export default function AddMemberForm() {
 
         <input
           type="submit"
-          className="w-full cursor-pointer bg-fuchsia-600 p-3 text-xl font-black text-white hover:bg-fuchsia-700"
+          className="w-full cursor-pointer bg-fuchsia-600 p-3 text-xl font-black text-white transition-all hover:bg-fuchsia-700"
           value="Buscar Usuario"
         />
       </form>
