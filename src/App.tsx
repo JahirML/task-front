@@ -13,6 +13,7 @@ import ConfirmAccount from "./pages/auth/ConfirmAccount";
 import RequestNewCode from "./pages/auth/RequestNewCode";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import NewPassword from "./pages/auth/NewPassword";
+import ProjectTeam from "./pages/projects/ProjectTeam";
 
 const queryClient = new QueryClient();
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/projects/create" element={<CreateProjetPage />} />
             <Route path="/projects/:projectId" element={<ProjectDetails />} />
             <Route path="/projects/:projectId/edit" element={<EditProject />} />
+            <Route path="/projects/:projectId/team" element={<ProjectTeam />} />
           </Route>
           <Route element={<AuthLayout />}>
             <Route path="/auth/login" element={<LoginPage />} />

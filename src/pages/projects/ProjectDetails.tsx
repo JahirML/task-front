@@ -2,7 +2,7 @@ import TaskForm from "@/components/tasks/TaskForm";
 import useGetProjectById from "@/hooks/projects/useGetProjectById";
 import Modal from "@/ui/Modal";
 import Spinner from "@/ui/Spinner";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import type { TaskFormData } from "@/types/index";
 import useCreateTask from "@/hooks/tasks/useCreateTask";
@@ -72,6 +72,12 @@ function ProjectDetails() {
           >
             Agregar tarea
           </button>
+          <Link
+            to="team"
+            className="cursor-pointer bg-fuchsia-500 px-10 py-3 text-xl font-bold text-white transition-all hover:bg-fuchsia-700"
+          >
+            Colaboradores
+          </Link>
         </nav>
         <TaskList tasks={project.tasks} />
         {isOpenModal && (
