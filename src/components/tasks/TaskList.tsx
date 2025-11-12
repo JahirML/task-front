@@ -37,7 +37,6 @@ function TaskList({ tasks }: TaskProps) {
 
       <div className="flex gap-5 overflow-x-scroll pb-32 2xl:overflow-auto">
         {Object.entries(groupedTasks).map(([status, tasks]) => {
-          console.log(statusColors[status]);
           return (
             <div key={status} className="min-w-[300px] 2xl:w-1/5 2xl:min-w-0">
               <h3

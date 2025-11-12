@@ -10,7 +10,7 @@ export default function LoginPage() {
   const { login } = useLogin();
   const navigate = useNavigate();
   const { user } = useAuth();
-  console.log(user);
+
   const initialValues: UserLoginForm = {
     email: "",
     password: "",
