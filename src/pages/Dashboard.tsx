@@ -6,10 +6,14 @@ import useGetProjects from "@/hooks/projects/useGetProjects";
 import { Link } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
 import useDeleteProject from "@/hooks/projects/useDeleteProject";
+import useAuth from "@/hooks/auth/useAuth";
 
 function Dashboard() {
+  const { user, isLoading: isLoadingUser } = useAuth();
   const { projects, isLoading } = useGetProjects();
   const { deleteProject } = useDeleteProject();
+  console.log(user?._id);
+  console.log(projects);
 
   return (
     <>
@@ -25,7 +29,7 @@ function Dashboard() {
           Nuevo proyecto
         </Link>
       </nav>
-      {isLoading && <Spinner />}
+      {isLoading && isLoadingUser && <Spinner />}
       {projects?.length ? (
         <ul
           role="list"
@@ -77,25 +81,29 @@ function Dashboard() {
                           Ver Proyecto
                         </Link>
                       </Menu.Item>
-                      <Menu.Item>
-                        <Link
-                          to={`/projects/${project._id}/edit`}
-                          className="block px-3 py-1 text-sm leading-6 text-gray-900"
-                        >
-                          Editar Proyecto
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <button
-                          type="button"
-                          className="block px-3 py-1 text-sm leading-6 text-red-500"
-                          onClick={() => {
-                            deleteProject(project._id);
-                          }}
-                        >
-                          Eliminar Proyecto
-                        </button>
-                      </Menu.Item>
+                      {user?._id === project.manager && (
+                        <>
+                          <Menu.Item>
+                            <Link
+                              to={`/projects/${project._id}/edit`}
+                              className="block px-3 py-1 text-sm leading-6 text-gray-900"
+                            >
+                              Editar Proyecto
+                            </Link>
+                          </Menu.Item>
+                          <Menu.Item>
+                            <button
+                              type="button"
+                              className="block px-3 py-1 text-sm leading-6 text-red-500"
+                              onClick={() => {
+                                deleteProject(project._id);
+                              }}
+                            >
+                              Eliminar Proyecto
+                            </button>
+                          </Menu.Item>
+                        </>
+                      )}
                     </Menu.Items>
                   </Transition>
                 </Menu>
