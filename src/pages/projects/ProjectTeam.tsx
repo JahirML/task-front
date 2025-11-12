@@ -1,24 +1,37 @@
-import { getmembers } from "@/api/TeamApi";
+import { getmembers, removeUser } from "@/api/TeamApi";
 import AddMemberModal from "@/components/team/AddMemberModal";
 import type { Project } from "@/types/index";
 import Spinner from "@/ui/Spinner";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Fragment } from "react/jsx-runtime";
 
 function ProjectTeam() {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = useParams();
   const projectId = params.projectId as Project["_id"];
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["members", projectId],
     queryFn: () => getmembers(projectId),
     // retry: false,
   });
-  console.log(data);
+
+  const { mutate } = useMutation({
+    mutationFn: removeUser,
+    onSuccess: (data) => {
+      toast.success(data);
+      queryClient.invalidateQueries({ queryKey: ["members", projectId] });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
   if (isLoading) return <Spinner />;
   if (isError) return <Navigate to={"/404"} />;
   if (data)
@@ -84,6 +97,9 @@ function ProjectTeam() {
                           <button
                             type="button"
                             className="block px-3 py-1 text-sm leading-6 text-red-500"
+                            onClick={() =>
+                              mutate({ projectId, id: member._id })
+                            }
                           >
                             Eliminar del Proyecto
                           </button>
