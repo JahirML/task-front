@@ -84,10 +84,11 @@ export const dashboardProjectSchema = z.array(
 export const editProjectSchema = z.object({});
 
 //TEAM
-export const teamMemberSchema = userSchema.pick({
+const teamMemberSchema = userSchema.pick({
   _id: true,
   name: true,
   email: true,
 });
+export const TeamMembersSchema = z.array(teamMemberSchema);
 export type TeamMember = z.infer<typeof teamMemberSchema>;
 export type TeamMemberForm = Pick<TeamMember, "email">;
