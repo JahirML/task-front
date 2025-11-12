@@ -63,6 +63,7 @@ export const projectSchema = z.object({
   projectName: z.string(),
   clientName: z.string(),
   description: z.string(),
+  manager: z.string(),
 });
 
 export type Project = z.infer<typeof projectSchema>;
@@ -78,6 +79,7 @@ export const dashboardProjectSchema = z.array(
     clientName: true,
     projectName: true,
     description: true,
+    manager: true,
   }),
 );
 
