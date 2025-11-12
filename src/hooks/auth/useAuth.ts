@@ -9,7 +9,7 @@ function useAuth() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["user", token],
+    queryKey: ["user"],
     queryFn: getUser,
     retry: 1,
     refetchOnWindowFocus: false,
