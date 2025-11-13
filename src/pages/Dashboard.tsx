@@ -41,7 +41,16 @@ function Dashboard() {
               className="flex justify-between gap-x-6 px-5 py-10"
             >
               <div className="flex min-w-0 gap-x-4">
-                <div className="min-w-0 flex-auto space-y-2">
+                <div className="min-w-0 flex-auto space-y-1">
+                  {user?._id === project.manager ? (
+                    <p className="w-fit rounded-lg border-2 border-blue-400 bg-blue-50 px-5 text-xs font-bold text-blue-500">
+                      Manager
+                    </p>
+                  ) : (
+                    <p className="w-fit rounded-4xl border-2 border-emerald-300 bg-emerald-50 px-5 text-xs font-bold text-emerald-500">
+                      Colaborador
+                    </p>
+                  )}
                   <Link
                     to={`/projects/${project._id}`}
                     className="cursor-pointer text-3xl font-bold text-gray-600 hover:underline"
