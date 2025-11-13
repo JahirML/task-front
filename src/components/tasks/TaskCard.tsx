@@ -40,7 +40,10 @@ function TaskCard({ task, canEdit }: CardProps) {
       <div className="flex min-w-0 flex-col gap-y-4">
         <button
           type="button"
-          className="text-left text-xl font-bold text-slate-600"
+          className="cursor-pointer text-left text-xl font-bold text-slate-600"
+          onClick={() => {
+            setSearchParams(`viewTask=${task._id}`);
+          }}
         >
           {task.name}
         </button>
