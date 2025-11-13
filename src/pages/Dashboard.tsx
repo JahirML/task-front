@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
 import useDeleteProject from "@/hooks/projects/useDeleteProject";
 import useAuth from "@/hooks/auth/useAuth";
+import { isManager } from "@/utils/policies";
 
 function Dashboard() {
   const { user, isLoading: isLoadingUser } = useAuth();
@@ -30,7 +31,7 @@ function Dashboard() {
         </Link>
       </nav>
       {isLoading && isLoadingUser && <Spinner />}
-      {projects?.length ? (
+      {projects?.length && user ? (
         <ul
           role="list"
           className="mt-10 divide-y divide-gray-100 border border-gray-100 bg-white shadow-lg"
@@ -42,7 +43,7 @@ function Dashboard() {
             >
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto space-y-1">
-                  {user?._id === project.manager ? (
+                  {isManager(project.manager, user?._id) ? (
                     <p className="w-fit rounded-lg border-2 border-blue-400 bg-blue-50 px-5 text-xs font-bold text-blue-500">
                       Manager
                     </p>
@@ -90,7 +91,7 @@ function Dashboard() {
                           Ver Proyecto
                         </Link>
                       </Menu.Item>
-                      {user?._id === project.manager && (
+                      {isManager(project.manager, user?._id) && (
                         <>
                           <Menu.Item>
                             <Link

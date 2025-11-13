@@ -11,11 +11,14 @@ import TaskList from "@/components/tasks/TaskList";
 import { useQueryClient } from "@tanstack/react-query";
 import EditTaskData from "@/components/tasks/EditTaskData";
 import TaskModalDetails from "@/components/tasks/TaskModalDetails";
+import useAuth from "@/hooks/auth/useAuth";
+import { isManager } from "@/utils/policies";
 
 function ProjectDetails() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const { user, isLoading: isLoadingUser } = useAuth();
 
   const { createTask } = useCreateTask();
   const { project, isLoading, projectId } = useGetProjectById();
@@ -57,28 +60,31 @@ function ProjectDetails() {
     navigate("", { replace: true });
   }
 
-  if (isLoading) return <Spinner />;
-  if (project)
+  if (isLoading && isLoadingUser) return <Spinner />;
+  if (project && user)
     return (
       <>
         <h1 className="text-5xl font-black">{project.projectName}</h1>
         <p className="mt-5 text-2xl font-light text-gray-500">
           {project.description}
         </p>
-        <nav className="my-5 flex gap-3">
-          <button
-            onClick={() => setSearchParams({ newTask: "true" })}
-            className="cursor-pointer bg-purple-400 px-10 py-3 text-xl font-bold text-white transition-all hover:bg-purple-500"
-          >
-            Agregar tarea
-          </button>
-          <Link
-            to="team"
-            className="cursor-pointer bg-fuchsia-500 px-10 py-3 text-xl font-bold text-white transition-all hover:bg-fuchsia-700"
-          >
-            Colaboradores
-          </Link>
-        </nav>
+        {isManager(project.manager, user._id) && (
+          <nav className="my-5 flex gap-3">
+            <button
+              onClick={() => setSearchParams({ newTask: "true" })}
+              className="cursor-pointer bg-purple-400 px-10 py-3 text-xl font-bold text-white transition-all hover:bg-purple-500"
+            >
+              Agregar tarea
+            </button>
+            <Link
+              to="team"
+              className="cursor-pointer bg-fuchsia-500 px-10 py-3 text-xl font-bold text-white transition-all hover:bg-fuchsia-700"
+            >
+              Colaboradores
+            </Link>
+          </nav>
+        )}
+
         <TaskList tasks={project.tasks} />
         {isOpenModal && (
           <Modal>
