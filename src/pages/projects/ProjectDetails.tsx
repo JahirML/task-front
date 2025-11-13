@@ -13,6 +13,7 @@ import EditTaskData from "@/components/tasks/EditTaskData";
 import TaskModalDetails from "@/components/tasks/TaskModalDetails";
 import useAuth from "@/hooks/auth/useAuth";
 import { isManager } from "@/utils/policies";
+import { useMemo } from "react";
 
 function ProjectDetails() {
   const navigate = useNavigate();
@@ -52,6 +53,10 @@ function ProjectDetails() {
       },
     );
   }
+  const canEdit = useMemo(
+    () => project?.manager === user?._id,
+    [project, user],
+  );
 
   const isOpenModal = Boolean(searchParams.get("newTask"));
   const ViewTaskModal = Boolean(searchParams.get("viewTask"));
@@ -85,7 +90,7 @@ function ProjectDetails() {
           </nav>
         )}
 
-        <TaskList tasks={project.tasks} />
+        <TaskList tasks={project.tasks} canEdit={canEdit} />
         {isOpenModal && (
           <Modal>
             <div>

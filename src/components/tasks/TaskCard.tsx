@@ -9,10 +9,11 @@ import { toast } from "react-toastify";
 
 type CardProps = {
   task: Task;
+  canEdit: boolean;
 };
 
-function TaskCard({ task }: CardProps) {
-  const [searchParams, setSearchParams] = useSearchParams();
+function TaskCard({ task, canEdit }: CardProps) {
+  const [, setSearchParams] = useSearchParams();
   const params = useParams();
   const { deleteteTask } = useDeleteTask();
   const queryClient = useQueryClient();
@@ -72,25 +73,29 @@ function TaskCard({ task }: CardProps) {
                   Ver Tarea
                 </button>
               </Menu.Item>
-              <Menu.Item>
-                <button
-                  type="button"
-                  className="block px-3 py-1 text-sm leading-6 text-gray-900"
-                  onClick={editTask}
-                >
-                  Editar Tarea
-                </button>
-              </Menu.Item>
+              {canEdit && (
+                <>
+                  <Menu.Item>
+                    <button
+                      type="button"
+                      className="block px-3 py-1 text-sm leading-6 text-gray-900"
+                      onClick={editTask}
+                    >
+                      Editar Tarea
+                    </button>
+                  </Menu.Item>
 
-              <Menu.Item>
-                <button
-                  type="button"
-                  className="block px-3 py-1 text-sm leading-6 text-red-500"
-                  onClick={handleDeleteTask}
-                >
-                  Eliminar Tarea
-                </button>
-              </Menu.Item>
+                  <Menu.Item>
+                    <button
+                      type="button"
+                      className="block px-3 py-1 text-sm leading-6 text-red-500"
+                      onClick={handleDeleteTask}
+                    >
+                      Eliminar Tarea
+                    </button>
+                  </Menu.Item>
+                </>
+              )}
             </Menu.Items>
           </Transition>
         </Menu>
