@@ -133,3 +133,7 @@
 .animate-modal-hide {
   animation: modal-hide 0.2s ease-in forwards;
 }
+.my-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(68, 45, 215, 0.301) transparent;
+}
