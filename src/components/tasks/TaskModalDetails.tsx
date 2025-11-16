@@ -48,6 +48,20 @@ function TaskModalDetails() {
               <p className="mb-2 text-lg text-slate-500">
                 Descripción: {task.description}
               </p>
+              <p className="mb-2 text-xl font-bold text-slate-500">
+                Historial de cambios{" "}
+              </p>
+              <ul className="my-scroll mb-3 max-h-20 list-inside list-decimal overflow-y-auto">
+                {task?.completedBy?.map((completedBy) => (
+                  <li key={completedBy._id}>
+                    <span className="font-bold text-slate-600">
+                      {statusTranslations[completedBy.status]}{" "}
+                    </span>
+                    por: {completedBy.user.name}
+                  </li>
+                ))}
+              </ul>
+
               <div className="my-5 space-y-3">
                 <label className="font-bold">
                   Estado Actual:{" "}

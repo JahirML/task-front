@@ -51,7 +51,8 @@ export const taskSchema = z.object({
   status: taskStatusSchema,
   completedBy: z.array(
     z.object({
-      user: userSchema.or(z.null()),
+      _id: z.string(),
+      user: userSchema,
       status: taskStatusSchema,
     }),
   ),
