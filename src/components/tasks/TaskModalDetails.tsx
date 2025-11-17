@@ -6,6 +6,7 @@ import Modal from "@/ui/Modal";
 import { formatDate } from "@/utils/utils";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import NotesPanel from "../notes/NotesPanel";
 
 function TaskModalDetails() {
   const navigate = useNavigate();
@@ -48,19 +49,23 @@ function TaskModalDetails() {
               <p className="mb-2 text-lg text-slate-500">
                 Descripción: {task.description}
               </p>
-              <p className="mb-2 text-xl font-bold text-slate-500">
-                Historial de cambios{" "}
-              </p>
-              <ul className="my-scroll mb-3 max-h-20 list-inside list-decimal overflow-y-auto">
-                {task?.completedBy?.map((completedBy) => (
-                  <li key={completedBy._id}>
-                    <span className="font-bold text-slate-600">
-                      {statusTranslations[completedBy.status]}{" "}
-                    </span>
-                    por: {completedBy.user.name}
-                  </li>
-                ))}
-              </ul>
+              {task.completedBy.length ? (
+                <>
+                  <p className="mb-2 text-xl font-bold text-slate-500">
+                    Historial de cambios{" "}
+                  </p>
+                  <ul className="my-scroll mb-3 max-h-20 list-inside list-decimal overflow-y-auto">
+                    {task?.completedBy?.map((completedBy) => (
+                      <li key={completedBy._id}>
+                        <span className="font-bold text-slate-600">
+                          {statusTranslations[completedBy.status]}{" "}
+                        </span>
+                        por: {completedBy.user.name}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
 
               <div className="my-5 space-y-3">
                 <label className="font-bold">
@@ -80,6 +85,7 @@ function TaskModalDetails() {
                   </select>
                 </label>
               </div>
+              <NotesPanel />
             </div>
           </div>
         </Modal>
