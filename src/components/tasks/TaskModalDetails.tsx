@@ -51,7 +51,7 @@ function TaskModalDetails() {
               </p>
               {task.completedBy.length ? (
                 <>
-                  <p className="mb-2 text-xl font-bold text-slate-500">
+                  <p className="my-3 text-2xl font-bold text-slate-600">
                     Historial de cambios{" "}
                   </p>
                   <ul className="my-scroll mb-3 max-h-20 list-inside list-decimal overflow-y-auto">
@@ -85,7 +85,7 @@ function TaskModalDetails() {
                   </select>
                 </label>
               </div>
-              <NotesPanel />
+              <NotesPanel notes={task.notes} />
             </div>
           </div>
         </Modal>
