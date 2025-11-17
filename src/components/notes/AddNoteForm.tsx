@@ -1,22 +1,46 @@
 import type { NoteFormData } from "@/types/index";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../ErrorMessage";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createNote } from "@/api/NoteApi";
+import { toast } from "react-toastify";
+import { useParams, useSearchParams } from "react-router-dom";
 
 function AddNoteForm() {
   const initiaValues: NoteFormData = {
     content: "",
   };
+  const [searchParams] = useSearchParams();
+  const { projectId = "" } = useParams();
+  const queryClient = useQueryClient();
+  const taskId = searchParams.get("viewTask") as string;
   const {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
     reset,
   } = useForm({
     defaultValues: initiaValues,
   });
+  const { mutate } = useMutation({
+    mutationFn: createNote,
+    onSuccess: (data) => {
+      toast.success(data);
+      reset();
+      queryClient.invalidateQueries({
+        queryKey: ["task", taskId],
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
   function submitForm(formData: NoteFormData) {
-    console.log(formData);
+    mutate({
+      taskId,
+      projectId,
+      formData,
+    });
   }
   return (
     <form onSubmit={handleSubmit(submitForm)} noValidate className="space-y-3">
