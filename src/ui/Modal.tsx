@@ -33,7 +33,7 @@ const Modal = ({ children }: ModalProps) => {
       }`}
     >
       <div
-        className={`relative w-11/12 max-w-[700px] rounded-lg bg-white px-10 py-12 shadow-2xl ${
+        className={`relative h-4/5 max-h-[800px] w-11/12 max-w-[700px] overflow-y-auto rounded-lg bg-white px-10 py-12 shadow-2xl ${
           isClosing ? "animate-modal-hide" : "animate-modal-show"
         }`}
       >
