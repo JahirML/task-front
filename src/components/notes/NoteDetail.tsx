@@ -1,8 +1,12 @@
+import { deleteNote } from "@/api/NoteApi";
 import useAuth from "@/hooks/auth/useAuth";
 import type { Note } from "@/types/index";
 import Spinner from "@/ui/Spinner";
 import { formatDate } from "@/utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type Props = {
   note: Note;
@@ -14,6 +18,27 @@ function NoteDetail({ note }: Props) {
     () => user?._id === note.createdBy._id,
     [user?._id, note.createdBy._id],
   );
+  const [searchParams] = useSearchParams();
+  const queryClient = useQueryClient();
+
+  const { projectId = "" } = useParams();
+  const taskId = searchParams.get("viewTask") as string;
+
+  const { mutate } = useMutation({
+    mutationFn: deleteNote,
+    onSuccess: (data) => {
+      toast.success(data);
+      queryClient.invalidateQueries({
+        queryKey: ["task", taskId],
+      });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+  function handleDeleteNote() {
+    mutate({ projectId, taskId, noteId: note._id });
+  }
 
   if (isLoading) return <Spinner />;
   return (
@@ -28,6 +53,7 @@ function NoteDetail({ note }: Props) {
       {canDelete && (
         <button
           type="button"
+          onClick={handleDeleteNote}
           className="ho cursor-pointer bg-red-600 p-2 text-xs font-bold text-white transition-colors hover:bg-red-700"
         >
           Eliminar
