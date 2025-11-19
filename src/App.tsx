@@ -14,6 +14,9 @@ import RequestNewCode from "./pages/auth/RequestNewCode";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import NewPassword from "./pages/auth/NewPassword";
 import ProjectTeam from "./pages/projects/ProjectTeam";
+import ProfilePage from "./pages/profile/ProfilePage";
+import ChangePasswordPage from "./pages/profile/ChangePasswordPage";
+import ProfileLayout from "./layouts/ProfileLayout";
 
 const queryClient = new QueryClient();
 function App() {
@@ -27,6 +30,14 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectDetails />} />
             <Route path="/projects/:projectId/edit" element={<EditProject />} />
             <Route path="/projects/:projectId/team" element={<ProjectTeam />} />
+
+            <Route element={<ProfileLayout />}>
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route
+                path="/profile/password"
+                element={<ChangePasswordPage />}
+              />
+            </Route>
           </Route>
           <Route element={<AuthLayout />}>
             <Route path="/auth/login" element={<LoginPage />} />
