@@ -32,6 +32,7 @@ export const userSchema = authSchema
   });
 
 export type User = z.infer<typeof userSchema>;
+export type UserProfileForm = Pick<User, "email" | "name">;
 
 // !NOTES
 export const noteSchema = z.object({
