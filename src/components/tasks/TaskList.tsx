@@ -1,8 +1,9 @@
-import type { Task } from "@/types/index";
+import type { Task, TaskStatus } from "@/types/index";
 import TaskCard from "./TaskCard";
 import { statusTranslations } from "@/locales/es";
 import DropTask from "./DropTask";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
+import useEditStatus from "@/hooks/tasks/useEditStatus";
 
 type TaskProps = {
   tasks: Task[];
@@ -28,6 +29,7 @@ const statusColors: { [key: string]: string } = {
 };
 
 function TaskList({ tasks, canEdit }: TaskProps) {
+  const { updateTaskStatus, projectId } = useEditStatus();
   const groupedTasks = tasks.reduce((acc, task) => {
     let currentGroup = acc[task.status] ? [...acc[task.status]] : [];
     currentGroup = [...currentGroup, task];
@@ -37,7 +39,10 @@ function TaskList({ tasks, canEdit }: TaskProps) {
   function handleDragEnd(e: DragEndEvent) {
     const { over, active } = e;
     if (over && over.id) {
-      console.log("valido");
+      const taskId = active.id.toString();
+      const status = over.id as TaskStatus;
+
+      updateTaskStatus({ projectId, taskId, status });
     }
   }
 

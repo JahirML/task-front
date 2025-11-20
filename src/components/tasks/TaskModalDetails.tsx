@@ -74,7 +74,7 @@ function TaskModalDetails() {
                     name=""
                     id=""
                     className="w-full border border-gray-300 bg-white p-3"
-                    defaultValue={task.status}
+                    value={task.status}
                     onChange={handleChangeStatus}
                   >
                     {Object.entries(statusTranslations).map(([key, value]) => (
