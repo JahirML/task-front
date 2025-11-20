@@ -6,6 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Fragment } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDraggable } from "@dnd-kit/core";
 
 type CardProps = {
   task: Task;
@@ -13,6 +14,9 @@ type CardProps = {
 };
 
 function TaskCard({ task, canEdit }: CardProps) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task._id,
+  });
   const [, setSearchParams] = useSearchParams();
   const params = useParams();
   const { deleteteTask } = useDeleteTask();
@@ -34,9 +38,20 @@ function TaskCard({ task, canEdit }: CardProps) {
       },
     );
   };
+  const style = transform
+    ? {
+        transform: `translate(${transform.x}px,${transform.y}px)`,
+      }
+    : undefined;
 
   return (
-    <li className="flex justify-between gap-3 border border-slate-300 bg-white p-5">
+    <li
+      {...listeners}
+      {...attributes}
+      ref={setNodeRef}
+      style={style}
+      className="flex justify-between gap-3 border border-slate-300 bg-white p-5"
+    >
       <div className="flex min-w-0 flex-col gap-y-4">
         <button
           type="button"
