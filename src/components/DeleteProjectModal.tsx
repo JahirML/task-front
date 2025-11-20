@@ -7,7 +7,6 @@ import type { CheckPasswordForm } from "../types";
 import { useMutation } from "@tanstack/react-query";
 import { checkPassword } from "@/api/AuthApi";
 import { toast } from "react-toastify";
-// import ErrorMessage from "../ErrorMessage";
 
 export default function DeleteProjectModal() {
   const initialValues = {
