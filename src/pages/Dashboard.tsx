@@ -1,20 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 
 import useGetProjects from "@/hooks/projects/useGetProjects";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
-import useDeleteProject from "@/hooks/projects/useDeleteProject";
 import useAuth from "@/hooks/auth/useAuth";
 import { isManager } from "@/utils/policies";
+import DeleteProjectModal from "@/components/DeleteProjectModal";
 
 function Dashboard() {
   const { user, isLoading: isLoadingUser } = useAuth();
   const { projects, isLoading } = useGetProjects();
-  const { deleteProject } = useDeleteProject();
-  console.log(user?._id);
-  console.log(projects);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <>
@@ -106,7 +104,7 @@ function Dashboard() {
                               type="button"
                               className="block px-3 py-1 text-sm leading-6 text-red-500"
                               onClick={() => {
-                                deleteProject(project._id);
+                                setSearchParams({ deleteProject: project._id });
                               }}
                             >
                               Eliminar Proyecto
@@ -129,6 +127,7 @@ function Dashboard() {
           </Link>
         </p>
       )}
+      {searchParams.get("deleteProject") && <DeleteProjectModal />}
     </>
   );
 }
