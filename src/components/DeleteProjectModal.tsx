@@ -1,10 +1,12 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "./ErrorMessage";
 import useDeleteProject from "@/hooks/projects/useDeleteProject";
 import Modal from "@/ui/Modal";
+import type { CheckPasswordForm } from "../types";
+import { useMutation } from "@tanstack/react-query";
+import { checkPassword } from "@/api/AuthApi";
+import { toast } from "react-toastify";
 // import ErrorMessage from "../ErrorMessage";
 
 export default function DeleteProjectModal() {
@@ -17,18 +19,26 @@ export default function DeleteProjectModal() {
 
   const queryParams = new URLSearchParams(location.search);
   const deleteProjectId = queryParams.get("deleteProject")!;
-  const show = deleteProjectId ? true : false;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
-
-  const handleForm = async (formData) => {};
+  const checkUserPasswordMutation = useMutation({
+    mutationFn: checkPassword,
+    onError: (err) => toast.error(err.message),
+  });
+  const handleForm = async (formData: CheckPasswordForm) => {
+    await checkUserPasswordMutation.mutateAsync(formData);
+    deleteProject(deleteProjectId, {
+      onSuccess: () => {
+        navigate("", { replace: true });
+      },
+    });
+  };
 
   return (
-    // <Transition appear show={show} as={Fragment}>
     <Modal>
       <div className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-4 text-left align-middle transition-all">
         <h3 className="my-5 text-4xl font-black">Eliminar Proyecto </h3>
