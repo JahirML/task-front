@@ -45,14 +45,14 @@ function TaskCard({ task, canEdit }: CardProps) {
     : undefined;
 
   return (
-    <li
-      {...listeners}
-      {...attributes}
-      ref={setNodeRef}
-      style={style}
-      className="flex justify-between gap-3 border border-slate-300 bg-white p-5"
-    >
-      <div className="flex min-w-0 flex-col gap-y-4">
+    <li className="flex justify-between gap-3 border border-slate-300 bg-white p-5">
+      <div
+        {...listeners}
+        {...attributes}
+        ref={setNodeRef}
+        style={style}
+        className="flex min-w-0 flex-col gap-y-4"
+      >
         <button
           type="button"
           className="cursor-pointer text-left text-xl font-bold text-slate-600"
