@@ -1,7 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
-
 import useGetProjects from "@/hooks/projects/useGetProjects";
 import { Link, useSearchParams } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
