@@ -1,10 +1,22 @@
+import { getPartialProjectById } from "@/api/ProjectApi";
 import EditProjectForm from "@/components/projects/EditProjectForm";
-import useGetProjectById from "@/hooks/projects/useGetProjectById";
 import Spinner from "@/ui/Spinner";
-import { Navigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Navigate, useParams } from "react-router-dom";
 
 function EditProject() {
-  const { project, isLoading, isError } = useGetProjectById();
+  const params = useParams();
+  const projectId = params.projectId!;
+  const {
+    data: project,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["editProject", `project/${projectId}`],
+    queryFn: () => getPartialProjectById(projectId),
+  });
+  console.log(project);
+
   if (isLoading) return <Spinner />;
   if (isError) <Navigate to={"/404"} />;
 

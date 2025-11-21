@@ -91,7 +91,11 @@ export const projectSchema = z.object({
   description: z.string(),
   manager: z.string(),
 });
-
+export const editProjectSchema = projectSchema.pick({
+  projectName: true,
+  clientName: true,
+  description: true,
+});
 export type Project = z.infer<typeof projectSchema>;
 
 export type ProjectFormData = Pick<
@@ -108,8 +112,6 @@ export const dashboardProjectSchema = z.array(
     manager: true,
   }),
 );
-
-export const editProjectSchema = z.object({});
 
 //TEAM
 const teamMemberSchema = userSchema.pick({
