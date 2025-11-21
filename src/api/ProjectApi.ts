@@ -2,6 +2,7 @@ import api from "@/lib/axios";
 import {
   dashboardProjectSchema,
   editProjectSchema,
+  projectSchema,
   type Project,
   type ProjectFormData,
 } from "../types";
@@ -35,7 +36,8 @@ export async function getProjects() {
 export async function getProjectById(id: Project["_id"]) {
   try {
     const { data } = await api(`/projects/${id}`);
-    return data;
+    const response = projectSchema.safeParse(data);
+    if (response.success) return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
       throw new Error(error.response?.data.error);
@@ -47,7 +49,6 @@ export async function getPartialProjectById(id: Project["_id"]) {
   try {
     const { data } = await api(`/projects/${id}`);
     const response = editProjectSchema.safeParse(data);
-    console.log(response.data);
     if (response.success) return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
