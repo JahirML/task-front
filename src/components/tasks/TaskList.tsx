@@ -4,6 +4,7 @@ import { statusTranslations } from "@/locales/es";
 import DropTask from "./DropTask";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import useEditStatus from "@/hooks/tasks/useEditStatus";
+import { useQueryClient } from "@tanstack/react-query";
 
 type TaskProps = {
   tasks: Task[];
@@ -29,6 +30,7 @@ const statusColors: { [key: string]: string } = {
 };
 
 function TaskList({ tasks, canEdit }: TaskProps) {
+  const queryClient = useQueryClient();
   const { updateTaskStatus, projectId } = useEditStatus();
   const groupedTasks = tasks.reduce((acc, task) => {
     let currentGroup = acc[task.status] ? [...acc[task.status]] : [];
@@ -41,8 +43,26 @@ function TaskList({ tasks, canEdit }: TaskProps) {
     if (over && over.id) {
       const taskId = active.id.toString();
       const status = over.id as TaskStatus;
-
       updateTaskStatus({ projectId, taskId, status });
+      queryClient.setQueryData(
+        ["editProject", `project/${projectId}`],
+        (oldData) => {
+          console.log(oldData);
+          const updatedTask = oldData.tasks.map((task: Task) => {
+            if (task._id === taskId) {
+              return {
+                ...task,
+                status,
+              };
+            }
+            return task;
+          });
+          return {
+            ...oldData,
+            tasks: updatedTask,
+          };
+        },
+      );
     }
   }
 
