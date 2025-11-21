@@ -1,4 +1,4 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { TaskFormData } from "@/types/index";
 import ErrorMessage from "../ErrorMessage";
 
