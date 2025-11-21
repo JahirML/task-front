@@ -45,7 +45,9 @@ function ProjectDetails() {
           toast.success(data);
           reset();
           onClose();
-          queryClient.invalidateQueries();
+          queryClient.invalidateQueries({
+            queryKey: ["project", `project/${projectId}`],
+          });
         },
         onError: (error) => {
           toast.error(error.message);
