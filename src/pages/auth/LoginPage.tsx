@@ -4,7 +4,6 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "@/hooks/auth/useLogin";
 import useAuth from "@/hooks/auth/useAuth";
-import Spinner from "@/ui/Spinner";
 
 export default function LoginPage() {
   const { login } = useLogin();
