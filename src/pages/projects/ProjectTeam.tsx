@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { Fragment } from "react/jsx-runtime";
 
 function ProjectTeam() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const params = useParams();
   const projectId = params.projectId as Project["_id"];
   const queryClient = useQueryClient();
