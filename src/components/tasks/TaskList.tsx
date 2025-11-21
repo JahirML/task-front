@@ -1,4 +1,4 @@
-import type { Task, TaskStatus } from "@/types/index";
+import type { Project, TaskProject, TaskStatus } from "@/types/index";
 import TaskCard from "./TaskCard";
 import { statusTranslations } from "@/locales/es";
 import DropTask from "./DropTask";
@@ -7,11 +7,11 @@ import useEditStatus from "@/hooks/tasks/useEditStatus";
 import { useQueryClient } from "@tanstack/react-query";
 
 type TaskProps = {
-  tasks: Task[];
+  tasks: TaskProject[];
   canEdit: boolean;
 };
 type GroupedTasks = {
-  [key: string]: Task[];
+  [key: string]: TaskProject[];
 };
 
 const initialStatusGroups: GroupedTasks = {
@@ -46,9 +46,9 @@ function TaskList({ tasks, canEdit }: TaskProps) {
       updateTaskStatus({ projectId, taskId, status });
       queryClient.setQueryData(
         ["editProject", `project/${projectId}`],
-        (oldData) => {
+        (oldData: Project) => {
           console.log(oldData);
-          const updatedTask = oldData.tasks.map((task: Task) => {
+          const updatedTask = oldData.tasks.map((task) => {
             if (task._id === taskId) {
               return {
                 ...task,
