@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import type { UserRegistrationForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
-import { Link, replace, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCreateAccount from "@/hooks/auth/useCreateAccount";
 import { toast } from "react-toastify";
 import useAuth from "@/hooks/auth/useAuth";
