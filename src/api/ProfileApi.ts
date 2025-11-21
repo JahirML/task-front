@@ -1,5 +1,5 @@
 import { isAxiosError } from "axios";
-import type { UserProfileForm } from "../types";
+import type { UpdateCurrentUserPasswordForm, UserProfileForm } from "../types";
 import api from "@/lib/axios";
 
 export const updateProfile = async (formData: UserProfileForm) => {
@@ -13,7 +13,9 @@ export const updateProfile = async (formData: UserProfileForm) => {
   }
 };
 
-export const updatePassword = async (formData: UserProfileForm) => {
+export const updatePassword = async (
+  formData: UpdateCurrentUserPasswordForm,
+) => {
   try {
     const { data } = await api.post<string>("/auth/update-password", formData);
     return data;

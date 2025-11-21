@@ -3,9 +3,9 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updatePassword } from "@/api/ProfileApi";
 import { toast } from "react-toastify";
-import type { UserProfileForm } from "@/types/index";
+import type { UpdateCurrentUserPasswordForm } from "@/types/index";
 function ChangePasswordPage() {
-  const initialValues = {
+  const initialValues: UpdateCurrentUserPasswordForm = {
     current_password: "",
     password: "",
     password_confirmation: "",
@@ -31,7 +31,7 @@ function ChangePasswordPage() {
     },
   });
 
-  const handleChangePassword = (formData: UserProfileForm) => {
+  const handleChangePassword = (formData: UpdateCurrentUserPasswordForm) => {
     mutate(formData);
   };
 
