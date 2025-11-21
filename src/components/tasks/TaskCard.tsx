@@ -14,9 +14,10 @@ type CardProps = {
 };
 
 function TaskCard({ task, canEdit }: CardProps) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: task._id,
-  });
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: task._id,
+    });
   const [, setSearchParams] = useSearchParams();
   const params = useParams();
   const { deleteteTask } = useDeleteTask();
@@ -38,19 +39,25 @@ function TaskCard({ task, canEdit }: CardProps) {
       },
     );
   };
-  const style = transform
-    ? {
-        transform: `translate(${transform.x}px,${transform.y}px)`,
-      }
-    : undefined;
+  const style = {
+    transform: transform
+      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+      : undefined,
+    transition: isDragging ? "none" : "transform 0.2s ease",
+    zIndex: isDragging ? 1000 : 1,
+    boxShadow: isDragging ? "0px 4px 12px rgba(0, 0, 0, 0.15)" : undefined,
+    position: isDragging ? "relative" : undefined,
+  } as React.CSSProperties;
 
   return (
-    <li className="flex justify-between gap-3 border border-slate-300 bg-white p-5">
+    <li
+      style={style}
+      className="flex justify-between gap-3 border border-slate-300 bg-white p-5"
+    >
       <div
         {...listeners}
         {...attributes}
         ref={setNodeRef}
-        style={style}
         className="flex min-w-0 flex-col gap-y-4"
       >
         <button
