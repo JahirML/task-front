@@ -88,7 +88,7 @@ export async function updatePasswordWithToken({
   token,
 }: {
   formData: NewPasswordForm;
-  token: ConfirmToken;
+  token: ConfirmToken["token"];
 }) {
   try {
     const url = `auth/update-password/${token}`;
