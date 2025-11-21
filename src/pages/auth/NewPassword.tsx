@@ -1,7 +1,7 @@
 import NewPasswordToken from "@/components/auth/NewPasswordToken";
 import NewPasswordForm from "@/components/auth/NewPasswordForm";
 import { useState } from "react";
-import { ConfirmToken } from "@/types/index";
+import { type ConfirmToken } from "@/types/index";
 
 function NewPassword() {
   const [isValidToken, setIsValidToken] = useState(false);
