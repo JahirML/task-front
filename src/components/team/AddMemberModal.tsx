@@ -1,10 +1,9 @@
 import Modal from "@/ui/Modal";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AddMemberForm from "./AddMemberForm";
 
 function AddMemberModal() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const queryParams = new URLSearchParams(location.search);
   const addMember = queryParams.get("addMember");
