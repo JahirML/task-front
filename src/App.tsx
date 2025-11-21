@@ -17,6 +17,7 @@ import ProjectTeam from "./pages/projects/ProjectTeam";
 import ProfilePage from "./pages/profile/ProfilePage";
 import ChangePasswordPage from "./pages/profile/ChangePasswordPage";
 import ProfileLayout from "./layouts/ProfileLayout";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 function App() {
@@ -46,6 +47,9 @@ function App() {
             <Route path="/auth/request-code" element={<RequestNewCode />} />
             <Route path="/auth/forgot-password" element={<ForgotPassword />} />
             <Route path="/auth/new-password" element={<NewPassword />} />
+          </Route>
+          <Route element={<AuthLayout />}>
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />
