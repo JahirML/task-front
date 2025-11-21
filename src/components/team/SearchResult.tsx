@@ -1,7 +1,7 @@
 import { addUserToProject } from "@/api/TeamApi";
 import type { TeamMember } from "@/types/index";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { replace, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 type Props = {
