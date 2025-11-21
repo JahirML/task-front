@@ -46,7 +46,7 @@ function ProjectDetails() {
           reset();
           onClose();
           queryClient.invalidateQueries({
-            queryKey: ["project", `project/${projectId}`],
+            queryKey: ["editProject", `project/${projectId}`],
           });
         },
         onError: (error) => {
