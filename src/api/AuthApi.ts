@@ -4,6 +4,7 @@ import {
   type ConfirmToken,
   type ForgotPasswordForm,
   type NewPasswordForm,
+  type RequestConfirmationCodeForm,
   type UserLoginForm,
   type UserRegistrationForm,
 } from "@/types/index";
@@ -34,7 +35,9 @@ export async function confirmAccountApi(token: ConfirmToken) {
   }
 }
 
-export async function requestConfirmationCode(formData: ConfirmToken) {
+export async function requestConfirmationCode(
+  formData: RequestConfirmationCodeForm,
+) {
   try {
     const url = "auth/request-code";
     const { data } = await api.post<string>(url, formData);
