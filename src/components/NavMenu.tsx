@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { User } from "../types";
 import { useQueryClient } from "@tanstack/react-query";
 type NavMenuProps = {
@@ -9,9 +9,12 @@ type NavMenuProps = {
 };
 export default function NavMenu({ username }: NavMenuProps) {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   function logout() {
     localStorage.removeItem("AUTH_TOKEN_TASKFLOW");
-    queryClient.invalidateQueries({ queryKey: ["user"] });
+    queryClient.removeQueries();
+    navigate("/auth/login", { replace: true });
   }
 
   return (
