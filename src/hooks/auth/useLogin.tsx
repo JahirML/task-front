@@ -12,7 +12,7 @@ function useLogin() {
     },
     onSuccess: () => {
       toast.success("Iniciando sesion");
-      navigate("/");
+      navigate("/", { replace: true });
     },
   });
 
