@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface ModalProps {
@@ -23,6 +23,13 @@ const Modal = ({ children }: ModalProps) => {
     setIsClosing(true);
     setTimeout(onClose, 200);
   };
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div
