@@ -44,12 +44,12 @@ export default function NewPasswordToken({
             onChange={handleChange}
             onComplete={handleComplete}
           >
-            <PinInputField className="h-10 w-10 rounded-lg border border-gray-300 p-3 placeholder-white" />
-            <PinInputField className="h-10 w-10 rounded-lg border border-gray-300 p-3 placeholder-white" />
-            <PinInputField className="h-10 w-10 rounded-lg border border-gray-300 p-3 placeholder-white" />
-            <PinInputField className="h-10 w-10 rounded-lg border border-gray-300 p-3 placeholder-white" />
-            <PinInputField className="h-10 w-10 rounded-lg border border-gray-300 p-3 placeholder-white" />
-            <PinInputField className="h-10 w-10 rounded-lg border border-gray-300 p-3 placeholder-white" />
+            <PinInputField className="h-8 w-8 rounded-lg border border-gray-300 p-3 placeholder-white md:h-10 md:w-10" />
+            <PinInputField className="h-8 w-8 rounded-lg border border-gray-300 p-3 placeholder-white md:h-10 md:w-10" />
+            <PinInputField className="h-8 w-8 rounded-lg border border-gray-300 p-3 placeholder-white md:h-10 md:w-10" />
+            <PinInputField className="h-8 w-8 rounded-lg border border-gray-300 p-3 placeholder-white md:h-10 md:w-10" />
+            <PinInputField className="h-8 w-8 rounded-lg border border-gray-300 p-3 placeholder-white md:h-10 md:w-10" />
+            <PinInputField className="h-8 w-8 rounded-lg border border-gray-300 p-3 placeholder-white md:h-10 md:w-10" />
           </PinInput>
         </div>
       </form>
