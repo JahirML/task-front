@@ -6,7 +6,7 @@ function AuthLayout() {
   return (
     <>
       <div className="min-h-screen bg-gray-800">
-        <div className="mx-auto w-[450px] py-10 lg:py-20">
+        <div className="mx-auto w-[450px] max-w-4/5 py-10 lg:py-20">
           <Logo />
           <div className="mt-10">
             <Outlet />
