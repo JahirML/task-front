@@ -70,7 +70,7 @@ function TaskList({ tasks, canEdit }: TaskProps) {
     <>
       <h2 className="my-10 text-3xl font-black xl:text-5xl">Tareas</h2>
 
-      <div className="mx-auto grid gap-5 overflow-x-auto pb-32 md:w-4/5 lg:w-auto lg:grid-cols-5">
+      <div className="mx-auto grid gap-5 pb-32 md:w-4/5 lg:w-auto lg:grid-cols-5">
         <DndContext onDragEnd={handleDragEnd}>
           {Object.entries(groupedTasks).map(([status, tasks]) => {
             return (
