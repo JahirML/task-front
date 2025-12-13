@@ -45,8 +45,10 @@ function NoteDetail({ note }: Props) {
     <div className="flex items-center justify-between py-3">
       <div>
         <p>
-          {note.content} por{" "}
-          <span className="font-bold">{note.createdBy.name}</span>
+          {note.content}{" "}
+          <span className="font-bold text-slate-600">
+            por {note.createdBy.name}
+          </span>
         </p>
         <p className="text-xs text-slate-500">{formatDate(note.createdAt)}</p>
       </div>
