@@ -15,14 +15,14 @@ function Dashboard() {
 
   return (
     <>
-      <h1 className="text-5xl font-black">Mis proyetos</h1>
-      <p className="mt-5 text-2xl font-light text-gray-500">
+      <h1 className="text-3xl font-black md:text-5xl">Mis proyetos</h1>
+      <p className="mt-5 text-xl font-light text-gray-500 md:text-2xl">
         Maneja y administra tus proyectos
       </p>
       <nav className="my-5">
         <Link
           to="/projects/create"
-          className="cursor-pointer bg-purple-400 px-8 py-3 text-xl text-white transition-all hover:bg-purple-500"
+          className="cursor-pointer bg-purple-400 px-8 py-3 text-lg text-white transition-all hover:bg-purple-500 md:text-xl"
         >
           Nuevo proyecto
         </Link>
@@ -51,14 +51,16 @@ function Dashboard() {
                   )}
                   <Link
                     to={`/projects/${project._id}`}
-                    className="cursor-pointer text-3xl font-bold text-gray-600 hover:underline"
+                    className="cursor-pointer text-xl font-bold text-gray-600 hover:underline md:text-3xl"
                   >
                     {project.projectName}
                   </Link>
                   <p className="text-sm text-gray-400">
                     Cliente: {project.clientName}
                   </p>
-                  <p className="text-sm text-gray-400">{project.description}</p>
+                  <p className="text-xs text-gray-400 md:text-sm">
+                    {project.description}
+                  </p>
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-x-6">
