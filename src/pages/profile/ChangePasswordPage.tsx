@@ -38,8 +38,8 @@ function ChangePasswordPage() {
   return (
     <>
       <div className="mx-auto max-w-3xl">
-        <h1 className="text-5xl font-black">Cambiar Password</h1>
-        <p className="mt-5 text-2xl font-light text-gray-500">
+        <h1 className="text-3xl font-bold md:text-5xl">Cambiar Password</h1>
+        <p className="mt-5 text-lg font-light text-gray-500 md:text-2xl">
           Utiliza este formulario para cambiar tu password
         </p>
 
@@ -120,7 +120,7 @@ function ChangePasswordPage() {
           <input
             type="submit"
             value="Cambiar Password"
-            className="w-full cursor-pointer bg-fuchsia-600 p-3 font-bold text-white uppercase transition-colors hover:bg-fuchsia-700"
+            className="w-full cursor-pointer bg-fuchsia-600 p-3 font-semibold text-white uppercase transition-colors hover:bg-fuchsia-700 md:font-bold"
           />
         </form>
       </div>
